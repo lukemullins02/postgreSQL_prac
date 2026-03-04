@@ -1,16 +1,16 @@
 const { Router } = require("express");
 const {
-  renderIndex,
+  getUsernames,
   renderNew,
-  createNew,
+  createUsernamePost,
 } = require("../controllers/indexController");
 
 const indexRouter = Router();
 
-indexRouter.get("/", renderIndex);
+indexRouter.get("/", getUsernames);
 
 indexRouter.get("/new", renderNew);
 
-indexRouter.post("/new", createNew);
+indexRouter.post("/new", createUsernamePost);
 
 module.exports = indexRouter;

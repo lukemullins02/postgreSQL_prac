@@ -1,17 +1,23 @@
-const renderIndex = (req, res) => {
-  console.log("usernames will be logged here - wip");
-};
+const db = require("../db/queries");
 
-const renderNew = (req, res) => {
+async function getUsernames(req, res) {
+  const usernames = await db.getAllUsernames();
+  console.log("Usernames: ", usernames);
+  res.send("Usernames: " + usernames.map((user) => user.username).join(", "));
+}
+
+async function renderNew(req, res) {
   res.render("form");
-};
+}
 
-const createNew = (req, res) => {
-  console.log("username to be saved: ", req.body.username);
-};
+async function createUsernamePost(req, res) {
+  const { username } = req.body;
+  await db.insertUsername(username);
+  res.redirect("/");
+}
 
 module.exports = {
-  renderIndex,
+  getUsernames,
   renderNew,
-  createNew,
+  createUsernamePost,
 };
